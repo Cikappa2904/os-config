@@ -1,0 +1,1 @@
+# My personal config for the customization of various Linux components.
