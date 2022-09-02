@@ -1,0 +1,65 @@
+{
+    "programs": 
+    [
+        {
+            "name": "9N97ZCKPD60Q"
+        },
+        {
+            "name": "WhatsApp.WhatsApp"
+        },
+        {
+            "name": "Spotify.Spotify"
+        },
+        {
+            "name": "Discord.Discord"
+        },
+        {
+            "name": "VMware.WorkstationPro"
+        },
+        {
+            "name": "OBSProject.OBSStudio"
+        },
+        {
+            "name": "Microsoft.VisualStudioCode"
+        },
+        {
+            "name": "GitHub.GitHubDesktop"
+        },
+        {
+            "name": "Notion.Notion"
+        },
+        {
+            "name": "CPUID.HWMonitor"
+        },
+        {
+            "name": "Notepad++.Notepad++"
+        },
+        {
+            "name": "9NBLGGH5R558"
+        },
+        {
+            "name": "Lexikos.AutoHotkey"
+        },
+        {
+            "name": "9MZ1SNWT0N5D"
+        },
+        {
+            "name": "JanDeDobbeleer.OhMyPosh"
+        },
+        {
+            "name": "ShareX.ShareX"
+        },
+        {
+            "name": "JAMSoftware.TreeSize.Free"
+        },
+        {
+            "name": "RevoUninstaller.RevoUninstaller"
+        },
+        {
+            "name": "OpenMedia.4KVideoDownloader"
+        },
+        {
+            "name": "7zip.7zip"
+        }
+    ]
+}
