@@ -49,19 +49,21 @@ Set-ItemProperty -path "HKCU:\Control Panel\Mouse" -name "MouseThreshold2" -valu
 
 $temp = $env:TEMP 
 #Cambiare colori 
-curl -o $temp "https://github.com/Cikappa2904/os-config/blob/main/windows/configurating/rosso.deskthemepack"
+curl.exe -o $temp "https://github.com/Cikappa2904/os-config/blob/main/windows/configurating/rosso.deskthemepack"
 "$temp\rosso.deskthemepack"
  
 #Uso AccentColorizer per mostrare il colore in zone dove normalmente non verrebbe mostrato
-curl -o "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\AccentColorizer-x64.exe" "https://github.com/krlvm/AccentColorizer/releases/download/v1.1.12/AccentColorizer-x64.exe" 
+curl.exe -o "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\AccentColorizer-x64.exe" "https://github.com/krlvm/AccentColorizer/releases/download/v1.1.12/AccentColorizer-x64.exe" 
 
 # Impostare tema scuro
 Set-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -name "SystemUsesLightTheme" -value "0" 
 Set-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -name "AppsUseLightTheme" -value "0" 
 
 #Copiare hotkey di ShareX
-curl -o "C:\Users\$username\Documents\ShareX\HotkeysConfig.json" "https://gist.githubusercontent.com/Cikappa2904/ae4b75a7ffac3c0ff0e330bd2d58fd42/raw/3268c4655a1bf6f1334bfdcd35c2751b74920680/HotkeysConfig.json"
- 
+Remove-Item "C:\Users\$username\Documents\ShareX" -Recurse
+curl.exe -o $temp\ShareX.zip "https://raw.githubusercontent.com/Cikappa2904/os-config/main/windows/configurating/ShareX.zip?token=GHSAT0AAAAAABXQIGU2YMZQQBL6RKODTBUIYYUZ5KQ"
+Expand-Archive $temp\ShareX.zip -DestinationPath "C:\Users\$username\Documents"
+Remove-Item $temp\ShareX.zip
 
 # #Impostare gli script di AHK all'avvio (https://stackoverflow.com/questions/9701840/how-to-create-a-shortcut-using-powershell)
 
@@ -92,7 +94,7 @@ curl -o "$temp\bebasneue.zip" "https://dl.dafont.com/dl/?f=bebas_neue"
 mkdir "$temp\BebasNeue"
 Expand-Archive -LiteralPath "$temp\bebasneue.zip" -DestinationPath "$temp\BebasNeue"
 Copy-Item "$temp\BebasNeue\BebasNeue-Regular.ttf" "C:\Windows\Temp\Font"
-Remove-Item "$temp\BebasNeue
+Remove-Item "$temp\BebasNeue"
 curl -o "$temp\coolvetica.zip" "https://dl.dafont.com/dl/?f=coolvetica"
 mkdir "$temp\coolvetica"
 Expand-Archive -LiteralPath "$temp\coolvetica.zip" -DestinationPath "$temp\coolvetica"
@@ -100,7 +102,7 @@ Copy-Item "$temp\coolvetica\coolvetica rg.otf" "C:\Windows\Temp\Font"
 Remove-Item "$temp\coolvetica"
 
 
-# # Impostare tema di oh-my-posh
+# Impostare tema di oh-my-posh
 # mkdir "C:\Users\$username\Documents\oh-my-posh"
-# curl -o "C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json" https://gist.github.com/Cikappa2904/47d4bac30688696984f785a0ac0aed80
+# curl -o "C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json" https://gist.github.com/Cikappa2904/47d4bac30688696984f785a0ac0aed80"
 # oh-my-posh --init --shell pwsh --config C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json | Invoke-Expression
