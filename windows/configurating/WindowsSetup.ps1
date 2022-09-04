@@ -10,7 +10,7 @@ if ($NoWinget -eq $false)
     {
         write-Host "Installing " -NoNewLine
         write-Host $JSONContent.programs[$i].name "`n"
-        winget install $JSONContent.programs[$i].name
+        winget install $JSONContent.programs[$i].name --accept-package-agreements --accept-source-agreements
         write-Host "`n"
     }
 }
@@ -49,19 +49,16 @@ Set-ItemProperty -path "HKCU:\Control Panel\Mouse" -name "MouseThreshold2" -valu
 
 $temp = $env:TEMP 
 #Cambiare colori 
-curl.exe -o $temp "https://github.com/Cikappa2904/os-config/blob/main/windows/configurating/rosso.deskthemepack"
-"$temp\rosso.deskthemepack"
+curl.exe -o "$temp\rosso.deskthemepack" "https://raw.githubusercontent.com/Cikappa2904/os-config/main/windows/configurating/rosso.deskthemepack"
+cmd.exe /c "$temp\rosso.deskthemepack"
  
-#Uso AccentColorizer per mostrare il colore in zone dove normalmente non verrebbe mostrato
-curl.exe -o "C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\AccentColorizer-x64.exe" "https://github.com/krlvm/AccentColorizer/releases/download/v1.1.12/AccentColorizer-x64.exe" 
-
 # Impostare tema scuro
 Set-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -name "SystemUsesLightTheme" -value "0" 
 Set-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -name "AppsUseLightTheme" -value "0" 
 
 #Copiare hotkey di ShareX
 Remove-Item "C:\Users\$username\Documents\ShareX" -Recurse
-curl.exe -o $temp\ShareX.zip "https://raw.githubusercontent.com/Cikappa2904/os-config/main/windows/configurating/ShareX.zip?token=GHSAT0AAAAAABXQIGU2YMZQQBL6RKODTBUIYYUZ5KQ"
+curl.exe -o $temp\ShareX.zip "https://raw.githubusercontent.com/Cikappa2904/os-config/main/windows/configurating/ShareX.zip"
 Expand-Archive $temp\ShareX.zip -DestinationPath "C:\Users\$username\Documents"
 Remove-Item $temp\ShareX.zip
 
@@ -69,7 +66,7 @@ Remove-Item $temp\ShareX.zip
 
 if ($AHKPath)
 {
-    $WshShell = New-Object -comObject WScript.Shell
+    $WshShell = New-Object -comObject WScript.Shellm
     $Shortcut = $WshShell.CreateShortcut("C:\Users\$username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\premiere shortcut.lnk")
     $Shortcut.TargetPath = "$AHKPath\premiere shortcut.ahk"
     $Shortcut.Save()
@@ -85,24 +82,24 @@ if ($AHKPath)
 
 
 curl -o "$temp\CaskaydiaCove.otf" "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Windows%20Compatible%20Regular.otf"
-Copy-Item "$temp\CaskaydiaCove.otf" "C:\Windows\Temp\Font"
-Remove-Item "$temp\CaskaydiaCove.otf"
-curl -o "$temp\FiraCode.ttf" "https://1drv.ms/u/s!AroVog_hHY2ngqc8s_n_znpCZ-BSrA?e=E67dIy"
+Copy-Item "$temp\CaskaydiaCove.otf" "C:\Windows\Temp\Font" 
+Remove-Item "$temp\CaskaydiaCove.otf" -Recurse
+curl -o "$temp\FiraCode.ttf" "https://raw.githubusercontent.com/Cikappa2904/os-config/main/windows/configurating/FiraCode-Regular.ttf"
 Copy-Item "$temp\FiraCode.ttf" "C:\Windows\Temp\Font"
-Remove-Item "$temp\FiraCode.ttf"
+Remove-Item "$temp\FiraCode.ttf" -Recurse
 curl -o "$temp\bebasneue.zip" "https://dl.dafont.com/dl/?f=bebas_neue"
 mkdir "$temp\BebasNeue"
 Expand-Archive -LiteralPath "$temp\bebasneue.zip" -DestinationPath "$temp\BebasNeue"
 Copy-Item "$temp\BebasNeue\BebasNeue-Regular.ttf" "C:\Windows\Temp\Font"
-Remove-Item "$temp\BebasNeue"
+Remove-Item "$temp\BebasNeue" -Recurse 
 curl -o "$temp\coolvetica.zip" "https://dl.dafont.com/dl/?f=coolvetica"
 mkdir "$temp\coolvetica"
 Expand-Archive -LiteralPath "$temp\coolvetica.zip" -DestinationPath "$temp\coolvetica"
 Copy-Item "$temp\coolvetica\coolvetica rg.otf" "C:\Windows\Temp\Font"
-Remove-Item "$temp\coolvetica"
+Remove-Item "$temp\coolvetica" -Recurse
 
 
-# Impostare tema di oh-my-posh
+# # Impostare tema di oh-my-posh
 # mkdir "C:\Users\$username\Documents\oh-my-posh"
-# curl -o "C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json" https://gist.github.com/Cikappa2904/47d4bac30688696984f785a0ac0aed80"
+# curl.exe -o "C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json" "https://gist.github.com/Cikappa2904/47d4bac30688696984f785a0ac0aed80"
 # oh-my-posh --init --shell pwsh --config C:\Users\$username\Documents\oh-my-posh\ohmyposh-theme.json | Invoke-Expression
